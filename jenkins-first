@@ -4,20 +4,20 @@ pipeline {
     pollSCM('*/5 * * * *')
   }
   stages{
-  stage('Init'){
-  steps {
-  echo "Init step.."
-  }
-  }
-       stage ('Build') {
-        steps {
-          echo "Build step.."
-        }
-        }
-       stage ('Deploy') {
-             steps {
-               echo "Deploy step.."
-             }
-           }
+    stage('Clean'){
+    steps {
+     sh "./gradlew clean"
     }
-} 
+  }
+    stage('Build'){
+      steps {
+       sh "./gradlew Build"
+      }
+    }
+     stage('War'){
+        steps {
+         sh "./gradlew War"
+        }
+      }
+      }
+      }
