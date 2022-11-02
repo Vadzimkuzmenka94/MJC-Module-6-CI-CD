@@ -1,0 +1,6 @@
+rootProject.name = 'module_6'
+include 'service'
+include 'repository'
+include 'controller'
+include 'model'
+
