@@ -1,15 +1,16 @@
-pipeline {
-agent { label any }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  stages {
-    stage('Scan') {
-      steps {
-        withSonarQubeEnv(installationName: 'sq') { 
-          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-        }
-      }
-    }
-  }
-}
+pipeline{
+    agent any
+    stages{
+       stage('GetCode'){
+            steps{
+                git 'https://github.com/Vadzimkuzmenka94/module_6.git'
+            }
+         }
+       stage('Test and SonarQube') {
+             steps{
+                withSonarQubeEnv('sonar-server') {
+                    sh "./gradlew sonarqube"
+                }
+             }
+         }
+         }
