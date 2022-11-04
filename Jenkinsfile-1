@@ -4,16 +4,10 @@ pipeline{
        stage('GetCode'){
             steps{
                 git 'https://github.com/Vadzimkuzmenka94/module_6.git'
-            }
-         }
-    stages {
-    stage('Scan') {
-      steps {
-        withSonarQubeEnv(installationName: 'sq1') { 
+                  withSonarQubeEnv(installationName: 'sq1') { 
           sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+            }
         }
-      }
     }
   }
-}
 }
