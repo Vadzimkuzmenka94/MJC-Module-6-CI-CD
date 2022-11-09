@@ -4,8 +4,6 @@ import com.epam.esm.dao.UserDao;
 import com.epam.esm.dao.jpaRepository.UsersRepository;
 import com.epam.esm.dto.UserDto;
 import com.epam.esm.entity.User;
-import com.epam.esm.exeption.AppException;
-import com.epam.esm.exeption.ErrorCode;
 import com.epam.esm.mapper.impl.UserMapper;
 import com.epam.esm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +42,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto readById(Long id) {
         Optional<User> userOptional = userDao.readById(id);
-     /*   if (userOptional.isEmpty()) {
-            throw new AppException(ErrorCode.USER_NOT_FOUND, ID, id);
-        }*/
         return mapper.mapToDto(userOptional.get());
     }
 

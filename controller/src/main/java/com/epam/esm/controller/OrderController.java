@@ -48,13 +48,13 @@ public class OrderController {
                 .anyMatch(r -> r.getAuthority().equals(ADMIN))) {
             List<OrderDto> orders = orderService.readAll(page, size);
             for (OrderDto order : orders) {
-                addLinks(order);
+                addLinksForAdminRole(order);
             }
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         } else {
             List<OrderDto> orders = orderService.readAll(page, size);
             for (OrderDto order : orders) {
-                addLinksForSimpleUser(order);
+                addLinksForUserRole(order);
             }
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         }
@@ -79,13 +79,13 @@ public class OrderController {
                 .anyMatch(r -> r.getAuthority().equals(ADMIN))) {
             List<OrderDto> orders = orderService.readUserOrders(userId, page, size);
             for (OrderDto order : orders) {
-                addLinks(order);
+                addLinksForAdminRole(order);
             }
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         } else {
             List<OrderDto> orders = orderService.readUserOrders(userId, page, size);
             for (OrderDto order : orders) {
-                addLinksForSimpleUser(order);
+                addLinksForUserRole(order);
             }
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         }
@@ -105,11 +105,11 @@ public class OrderController {
                 .stream()
                 .anyMatch(r -> r.getAuthority().equals(ADMIN))) {
             OrderDto order = orderService.read(id);
-            addLinks(order);
+            addLinksForAdminRole(order);
             return ResponseEntity.status(HttpStatus.OK).body(order);
         } else {
             OrderDto order = orderService.read(id);
-            addLinksForSimpleUser(order);
+            addLinksForUserRole(order);
             return ResponseEntity.status(HttpStatus.OK).body(order);
         }
     }
@@ -145,7 +145,7 @@ public class OrderController {
      * Method for all links
      * @param orderDto
      */
-    private void addLinks(OrderDto orderDto) {
+    private void addLinksForAdminRole(OrderDto orderDto) {
         orderDto.add(linkTo(methodOn(OrderController.class).readById(orderDto.getId())).withSelfRel());
         orderDto.add(linkTo(methodOn(OrderController.class).create(0L, 0L)).withRel("order link -> create"));
         orderDto.add(linkTo(methodOn(OrderController.class).delete(orderDto.getId())).withRel("order link -> delete"));
@@ -161,7 +161,7 @@ public class OrderController {
      *
      * @param orderDto
      */
-    private void addLinksForSimpleUser(OrderDto orderDto) {
+    private void addLinksForUserRole(OrderDto orderDto) {
         orderDto.add(linkTo(methodOn(OrderController.class).readById(orderDto.getId())).withSelfRel());
         orderDto.add(linkTo(methodOn(OrderController.class).create(0L, 0L)).withRel("order link -> create"));
         orderDto.add(linkTo(methodOn(GiftCertificateController.class).readById(orderDto.getCertificate().getCertificate_id())).withRel("gift certificate link -> read"));

@@ -31,7 +31,6 @@ public class JwtTokenController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private JWTUtil jwtTokenUtil;
 
@@ -52,7 +51,6 @@ public class JwtTokenController {
             throw new AppException(ErrorCode.PASSWORD_OR_LOGIN_IS_INCORRECT, new Object());
         }
         String jwt = jwtTokenUtil.generateToken((UserDetails) authentication.getPrincipal());
-
         return new AuthResponse(jwt);
     }
 

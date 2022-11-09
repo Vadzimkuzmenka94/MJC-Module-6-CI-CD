@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class TagServiceImpl implements TagService {
-    private static final String ID = "tag_id";
     private static final String NAME = "tag_name";
     private final TagDao tagDao;
     private final TagMapper mapper;
@@ -35,9 +34,6 @@ public class TagServiceImpl implements TagService {
     @Override
     public TagDto read(Long id) {
         Optional<Tag> tagOptional = tagDao.readById(id);
-      /*  if (tagOptional.isEmpty()) {
-            throw new AppException(ErrorCode.TAG_NOT_FOUND, ID, id);
-        }*/
         return mapper.mapToDto(tagOptional.get());
     }
 
@@ -63,18 +59,12 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void delete(Long id) {
-       /* if (tagDao.readById(id).isEmpty()) {
-            throw new AppException(ErrorCode.TAG_NO_CONTENT, ID, id);
-        }*/
         tagDao.delete(id);
     }
 
     @Override
     public TagDto readByName(String name) {
         Optional<Tag> tagOptional = tagDao.readByName(name);
-      /*  if (tagOptional.isEmpty()) {
-            throw new AppException(ErrorCode.TAG_NOT_FOUND, NAME, name);
-        }*/
         return tagOptional.map(mapper::mapToDto).get();
     }
 

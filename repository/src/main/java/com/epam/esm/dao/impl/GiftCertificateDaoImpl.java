@@ -153,7 +153,7 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
         return giftCertificateList;
     }
 
-@Override
+    @Override
     public List<GiftCertificate> readByTag(List<Tag> tags, int page, int size) {
         List<GiftCertificate> resultList = new ArrayList<>();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

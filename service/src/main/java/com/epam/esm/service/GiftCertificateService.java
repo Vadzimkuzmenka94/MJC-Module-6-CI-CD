@@ -52,9 +52,6 @@ public interface GiftCertificateService {
      */
     boolean check(GiftCertificateDto giftCertificateDto, Long id);
 
-
-/*    List<GiftCertificateDto> readByTagNames(String[] tags, int page, int size, String method);*/
-
     /**
      *
      * @param partOfName

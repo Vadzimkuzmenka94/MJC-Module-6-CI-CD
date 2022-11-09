@@ -54,15 +54,8 @@ public enum ErrorCode {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
-    public void setHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
-    }
 }

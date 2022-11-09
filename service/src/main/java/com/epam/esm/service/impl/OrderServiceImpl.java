@@ -5,8 +5,6 @@ import com.epam.esm.dto.GiftCertificateDto;
 import com.epam.esm.dto.OrderDto;
 import com.epam.esm.dto.UserDto;
 import com.epam.esm.entity.Order;
-import com.epam.esm.exeption.AppException;
-import com.epam.esm.exeption.ErrorCode;
 import com.epam.esm.mapper.impl.OrderMapper;
 import com.epam.esm.service.GiftCertificateService;
 import com.epam.esm.service.OrderService;
@@ -21,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    private static final String ID = "id";
     private final OrderDao orderDao;
     private final OrderMapper mapper;
     private final UserService userService;
@@ -38,10 +35,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto read(Long id) {
         Optional<Order> optionalOrder = orderDao.readById(id);
-     /*   if (optionalOrder.isEmpty()) {
-            throw new AppException(ErrorCode.ORDER_NOT_FOUND, ID, id);
-        }*/
-
         return mapper.mapToDto(optionalOrder.get());
     }
 
@@ -76,9 +69,6 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public void delete(Long id) {
-      /*  if (orderDao.readById(id).isEmpty()) {
-            throw new AppException(ErrorCode.ORDER_NO_CONTENT, ID, id);
-        }*/
         orderDao.delete(id);
     }
 }
