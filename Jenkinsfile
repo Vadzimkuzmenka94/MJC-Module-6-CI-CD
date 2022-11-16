@@ -36,7 +36,7 @@ pipeline {
 
                 }
 
-        stage('Final build') {
+        stage('Final') {
 
             steps {
 
