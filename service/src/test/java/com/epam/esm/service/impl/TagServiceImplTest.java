@@ -80,7 +80,7 @@ public class TagServiceImplTest {
     void readAll_shouldThrow_TAG_NOT_FOUND(){
         doThrow(new AppException(ErrorCode.TAG_NOT_FOUND, new Object())).when(tagService).readAll(FIRST_PAGE,LAST_PAGE);
         assertThrows(AppException.class,()->{
-            tagService.readAll(FIRST_PAGE,LAST_PAGE);
+            tagService.readAll(FIRST_PAGE,1);
         });
     }
 
